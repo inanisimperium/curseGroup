@@ -10,7 +10,7 @@ model = pickle.load(open('rabbit_model.pkl', 'rb'))
 #default page of our web-app
 @app.route('/')
 def home():
-    return render_template('remodel (functioning_firebase).html')
+    return render_template('home.html')
 
 #To use the predict button in our web-app
 @app.route('/predict',methods=['POST'])
@@ -24,7 +24,7 @@ def predict():
 
     output = round(prediction[0], 2)
 
-    return render_template('remodel (functioning_firebase).html', prediction_text='{}'.format(output))
+    return render_template('home.html', prediction_text='{}'.format(output))
 
 if __name__ == "__main__":
     app.run(debug=True)
