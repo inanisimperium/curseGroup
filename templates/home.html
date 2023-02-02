@@ -245,29 +245,19 @@
             <h2>Modal Header</h2>
             </div>
             <div class="modal-body">
-                <div class="login">
-                    <h1>Weight Predictor</h1>
-                     <h3> Enter the following values to predict the weight of the rabbit</h3>
-                
-                     <!-- Main Input For Receiving Query to our ML -->
-                    <form action="{{ url_for('predict')}}"method="post">
-                        <input type="text" name="height" placeholder="Rabbit Height in Inches" required="required" />
-                      <input type="text" name="width" placeholder="Rabbit Width in Inches" required="required" />
-                          <!-- <input type="text" name="fuel" placeholder="Fuel" required="required" /> -->
-                
-                        <button type="submit" class="btn">Predict</button>
+                div class="login">
+                    <h2>Price Prediction</h2>
+                    <p>Introduce the number of rooms and distance:</p>
+                    <form action="{{url_for('predict')}}" method="post">
+                        <input type="text" name="rooms" placeholder="Rooms" required="required">
+                        <input type="text" name="distance" placeholder="Distance" required="required">
+                        <button type="submit" class="btn btn-primary btn-block btn-large"> Predict Value!</button>
                     </form>
+                    <br>
+                    <br>	
+                    <b>{{prediction_text}}</b>
                 
-                   <br>
-                   <br>
-                   
-                   
-                   {{ prediction_text }}
-                   
-                   
-                 </div>
-                
-            </div>
+                </div>
             <div class="modal-footer">
             <h3>Modal Footer</h3>
             </div>
