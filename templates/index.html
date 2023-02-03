@@ -199,8 +199,15 @@
             /* QR scanner css******************************************************************************************************************************** */
                 
         </style>
+        </style>
+        <!-- image classification api -->
         <script type="text/javascript" src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+        <!-- image classification api -->
+        
+
+        <!-- qr coode generator api -->
         <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+        <!-- qr coode generator api -->
     </head>
     <body>
         
@@ -604,7 +611,7 @@
             const uploadBtn = document.querySelector('.upload-btn');
 
             // Loading our MobileNet model
-            const model = ml5.imageClassifier("https://storage.googleapis.com/tm-model/ZHQ5nICh9/model.json", modelLoaded);
+            const model = ml5.imageClassifier("https://storage.googleapis.com/tm-model/sC8P_rq8V/model.json", modelLoaded);
 
             // modelLoaded() callback function definition
             function modelLoaded() {
