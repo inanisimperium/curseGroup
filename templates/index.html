@@ -98,7 +98,7 @@
                 color: white;
             }
 
-            /* for image classification********************************************************************* */
+            /* for image classification********************************************************************************************************************** */
             .container {
             display: flex;
             flex-direction: column;
@@ -162,7 +162,7 @@
             font-size: 1.3rem;
             text-align: center;
             padding: 5px 15px;
-            margin: 15px 0px 0px 0px;
+            margin: auto;
             border-radius: 3px; /* for curved edges */
             border: none;
             outline: none;
@@ -175,12 +175,76 @@
             outline: none;
             border: none;
             }
+            /* for image classification********************************************************************************************************************** */
+
+            /* QR scanner css******************************************************************************************************************************** */
+            #reader {
+            width: 200px;
+            }
+
+            .result {
+            background-color: green;
+            color: #fff;
+            padding: 20px;
+            }
+
+            .row {
+            display: flex;
+            }
+
+            #reader__scan_region {
+            background: white;
+            }
+            /* QR scanner css******************************************************************************************************************************** */
                 
         </style>
         <script type="text/javascript" src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     </head>
     <body>
-        <label>Rabbit Name</label> <input id="Rabbitcode" type="text">
+        
+
+        <!-- QR Scanner**************************************************************************************************************************************** -->
+        <div class="row">
+            <div class="col">
+              <div id="reader"></div>
+            </div>
+            <div class="col" style="padding: 30px">
+              <h4>Scan Result </h4>
+              <div id="result">
+                Result goes here
+              </div>
+            </div>
+          
+          </div>
+          <!-- partial -->
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js'></script><script  src="./script.js"></script>
+            <script>
+                // When scan is successful fucntion will produce data
+            function onScanSuccess(qrCodeMessage) {
+            document.getElementById("result").innerHTML =
+                '<span class="result">' + qrCodeMessage + "</span>";
+            }
+
+            // When scan is unsuccessful fucntion will produce error message
+            function onScanError(errorMessage) {
+            // Handle Scan Error
+            }
+
+            // Setting up Qr Scanner properties
+            var html5QrCodeScanner = new Html5QrcodeScanner("reader", {
+            fps: 10,
+            qrbox: 250
+            });
+
+            // in
+            html5QrCodeScanner.render(onScanSuccess, onScanError);
+            </script>
+
+
+        <!-- QR Scanner**************************************************************************************************************************************** -->
+
+        <label>Rabbit Name</label> <input id="Rabbitcode" type="text" required>
         <br>
         <br>
         <label>Breed</label> <input id="Breed" type="text">
@@ -209,7 +273,7 @@
                     </div>
                 
                     <!-- upload-btn will go here -->
-                    <input type="file" class="upload-btn"/>
+                    <input type="file" class="upload-btn" />
                     
                     <!-- predict-btn (disabled) -->
                     <button class="predict-btn" disabled>PREDICT</button>
@@ -232,7 +296,10 @@
         <br>
         <br>
         
-        <label>Weight</label> <input id="Weight" type="text">
+        <label>Weight</label> <input id="Weight" type="text" placeholder="Input Weight">
+        
+
+
         <button class="modal-button" href="#myModal2" style="width: 140px;">Weight Generator</button>
 
         <!-- The Modal -->
@@ -245,7 +312,7 @@
             <h2>Modal Header</h2>
             </div>
             <div class="modal-body">
-<!--        height+width=weight********************************************************************************************************************          -->
+
                 <div class="login">
                     
                        
@@ -282,8 +349,6 @@
                         });
                     </script>
                 </div>
-    <!--        height+width=weight********************************************************************************************************************          -->
-
                 
             </div>
             <div class="modal-footer">
@@ -297,6 +362,60 @@
             <option value="Male">Male</option>
             <option value="Female">Female</option>
         </select> -->
+
+        <!-- qr code*************************************************************************************************************************************** -->
+        <br>
+        <br>
+        <button type="button" onclick="generateQRCode()">
+            Generate QR Code
+          </button>
+          <br>
+          <br>
+          <div id="qrcode-container">
+            <!-- <div id="qrcode" class="qrcode"></div> -->
+            <!-- <h4>With some styles</h4> -->
+            <div id="qrcode-2" class="qrcode"></div>
+          </div>
+          <br>
+          <button id="qrprint">PRINT</button>
+        
+        
+          <script type="text/javascript">
+            function generateQRCode() {
+              let rabbitcode = document.getElementById("Rabbitcode").value;
+              if (rabbitcode) {
+                // let qrcodeContainer = document.getElementById("qrcode");
+                // qrcodeContainer.innerHTML = "";
+                // new QRCode(qrcodeContainer, website);
+                /*With some styles*/
+                let qrcodeContainer2 = document.getElementById("qrcode-2");
+                qrcodeContainer2.innerHTML = "";
+                new QRCode(qrcodeContainer2, {
+                  text: rabbitcode,
+                  width: 100,
+                  height: 100,
+                  colorDark: "#5868bf",
+                  colorLight: "#ffffff",
+                  correctLevel: QRCode.CorrectLevel.H
+                });
+                document.getElementById("qrcode-container").style.display = "block";
+              } else {
+                alert("Please enter a valid URL");
+              }
+            }
+        
+            document.getElementById("qrprint").onclick = () => {
+                var printwin = window.open("");
+                printwin.document.write(document.getElementById("qrcode-container").innerHTML);
+                printwin.stop();
+                let qr = printwin.document.querySelector("#qrcode-2 img");
+                qr.addEventListener("load", () => {
+                  printwin.print();
+                  printwin.close();
+                });
+              };
+          </script>
+        <!-- qr code*************************************************************************************************************************************** -->
 
         <hr size="4px">
 
@@ -418,15 +537,16 @@
 
             delBtn.addEventListener('click', Deletedata);
 
-            //-- assign events to buttons************************************************************************************************* -->
+
 
 
 
             
 
           </script>
+          <!-- for modal****************************************************************************************************************************************** -->
           <script>
-            // *****************************************for modal*******************************************************************************
+      
             var btn = document.querySelectorAll("button.modal-button");
 
             // All page modals
@@ -462,6 +582,9 @@
                 }
             }
           </script>
+          <!-- for modal****************************************************************************************************************************************** -->
+
+          <!-- script for image classification************************************************************************************************************************ -->
           <script>
             // grab reference for needed elements
             // .image
@@ -523,5 +646,6 @@
             }
             });
           </script>
+          <!-- script for image classification************************************************************************************************************************ -->
     </body>
 </html>
