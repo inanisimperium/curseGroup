@@ -156,12 +156,12 @@
 
             /* create our own upload button */
             .upload-btn::before {
-            content: 'Upload Image';
+            content: 'Upload File';
             display: block;
             background-color: yellow;
             font-size: 1.3rem;
             text-align: center;
-            padding: 5px 8px;
+            padding: 5px 15px;
             margin: 15px 0px 0px 0px;
             border-radius: 3px; /* for curved edges */
             border: none;
@@ -180,7 +180,7 @@
         <script type="text/javascript" src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
     </head>
     <body>
-        <label>Rabbit Code</label> <input id="Rabbitcode" type="text">
+        <label>Rabbit Name</label> <input id="Rabbitcode" type="text">
         <br>
         <br>
         <label>Breed</label> <input id="Breed" type="text">
@@ -209,7 +209,7 @@
                     </div>
                 
                     <!-- upload-btn will go here -->
-                    <input type="file" class="upload-btn" />
+                    <input type="file" class="upload-btn"/>
                     
                     <!-- predict-btn (disabled) -->
                     <button class="predict-btn" disabled>PREDICT</button>
@@ -245,9 +245,10 @@
             <h2>Modal Header</h2>
             </div>
             <div class="modal-body">
+<!--        height+width=weight********************************************************************************************************************          -->
                 <div class="login">
-                    <h2>Price Prediction</h2>
-                        <p>Introduce the number of rooms and distance:</p>
+                    
+                       
                         <form action="{{url_for('predict')}}" method="post">
                             <input type="text" name="height" placeholder="height" required="required">
                             <input type="text" name="width" placeholder="width" required="required">
@@ -271,9 +272,9 @@
                             data2 = 'Ready';
 
                         button.addEventListener("click", function() {
-                            if(input.value <= '1.9') {
+                            if(input.value <= '1.7') {
                                 output.innerHTML = data1;
-                            } else if (input.value >= '2.0') {
+                            } else if (input.value >= '1.8') {
                                 output.innerText = data2;
                             } else {
                                 output.innerHTML = 'Nothing Found!';
@@ -281,6 +282,8 @@
                         });
                     </script>
                 </div>
+    <!--        height+width=weight********************************************************************************************************************          -->
+
                 
             </div>
             <div class="modal-footer">
